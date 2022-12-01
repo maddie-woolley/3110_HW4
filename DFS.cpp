@@ -57,10 +57,10 @@ int main()
     g.addEdge(3, 3);
 
     cout << "Following is Depth First Traversal"
-            " (starting from vertex 2) \n";
+            " (starting from vertex 1) \n";
 
     // Function call
-    g.DFS(2);
+    g.DFS(1);
 
     return 0;
 }
