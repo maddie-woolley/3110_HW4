@@ -1,16 +1,19 @@
 //
-// Created by Maddie Woolley on 11/30/22.
+// Created by Maddie Woolley on 12/1/22.
 //
-// Program to print BFS traversal from a given
-// source vertex. BFS(int s) traverses vertices
-// reachable from s.
-#include<iostream>
-#include<list>
-#include<vector>
+//An attempt at reading in the adj matrix separate from the project file :)
+
+
+
+
+
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <list>
+#include <vector>
 using namespace std;
 
-// This class represents a directed graph using
-// adjacency list representation
 class Graph
 {
     int V;    // No. of vertices
@@ -74,20 +77,40 @@ void Graph::BFS(int s)
 }
 
 // Driver program to test methods of graph class
-int main()
-{
-    // Create a graph given in the above diagram
-    Graph g(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
 
+
+int main() {
+    std::string line;
+    std::ifstream infile("graph.txt");
+    std::vector<std::vector<char> > forest;
+    while (std::getline(infile, line)) {
+        std::vector<char> row;
+        for (char &c : line) {
+            if (c != ',') {
+                row.push_back(c);
+            }
+        }
+        forest.push_back(row);
+    }
+    //printing
+    Graph g(forest.size());
+    cout<<"Adjacency Matrix: "<<endl;
+    for (std::vector<char> &row : forest) {
+        for (char &c : row) {
+            std::cout << c << ' ';
+        }
+        std::cout << '\n';
+    }
+    //sending into the functions:
+    for (int i=0; i<forest.size(); ++i){
+        for (int j=1; j<forest[i].size(); ++j){
+            g.addEdge(i,j);
+        }
+    }
     cout << "Following is Breadth First Traversal "
          << "(starting from vertex 1) \n";
     g.BFS(1);
+
 
     return 0;
 }

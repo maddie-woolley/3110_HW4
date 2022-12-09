@@ -4,6 +4,7 @@
 // C++ program to print DFS traversal from
 // a given vertex in a  given graph
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <vector>
 #include <map>
@@ -47,14 +48,34 @@ void Graph::DFS(int v)
 // Driver's code
 int main()
 {
+    std::string line;
+    std::ifstream infile("graph.txt");
+    std::vector<std::vector<char> > forest;
+    int count = 0;
+    while (std::getline(infile, line)) {
+        std::vector<char> row;
+        ++count;
+        for (char &c : line) {
+            if (c != ',') {
+                row.push_back(c);
+            }
+        }
+        forest.push_back(row);
+    }
+    //printing
+    for (std::vector<char> &row : forest) {
+        for (char &c : row) {
+            std::cout << c << ' ';
+        }
+        std::cout << '\n';
+    }
     // Create a graph given in the above diagram
     Graph g;
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
+    for (int i=0; i<forest.size(); ++i){
+        for (int j=1; j<forest[i].size(); ++j){
+            g.addEdge(i,j);
+        }
+    }
 
     cout << "Following is Depth First Traversal"
             " (starting from vertex 1) \n";
