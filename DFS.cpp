@@ -63,6 +63,7 @@ int main()
         forest.push_back(row);
     }
     //printing
+    cout<<"Adjacency Matrix: "<<endl;
     for (std::vector<char> &row : forest) {
         for (char &c : row) {
             std::cout << c << ' ';
@@ -70,12 +71,14 @@ int main()
         std::cout << '\n';
     }
     // Create a graph given in the above diagram
+    // Create a graph given in the above diagram
     Graph g;
     for (int i=0; i<forest.size(); ++i){
         for (int j=1; j<forest[i].size(); ++j){
             g.addEdge(i,j);
         }
     }
+
 
     cout << "Following is Depth First Traversal"
             " (starting from vertex 1) \n";
